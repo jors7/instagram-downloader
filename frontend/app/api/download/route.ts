@@ -171,6 +171,9 @@ function getDemoContent(url: string): DownloadResponse {
       ? 'https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4'
       : 'https://picsum.photos/800/800',
     type: isReel ? 'video' : 'image',
+    thumbnail: isReel
+      ? 'https://picsum.photos/800/600'
+      : 'https://picsum.photos/800/800',
     quality: 'high'
   }];
 
