@@ -1,11 +1,9 @@
 {
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/.next",
-  "installCommand": "cd frontend && npm install",
   "framework": "nextjs",
+  "rootDirectory": "frontend",
   "regions": ["iad1"],
   "functions": {
-    "frontend/app/api/download/route.ts": {
+    "app/api/download/route.ts": {
       "maxDuration": 30
     }
   }

@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
         params: { url },
         headers: {
           'x-rapidapi-key': apiKey,
-          'x-rapidapi-host': process.env.RAPIDAPI_HOST || 'instagram-scraper-api3.p.rapidapi.com'
+          'x-rapidapi-host': process.env.RAPIDAPI_HOST || 'instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com'
         },
         timeout: 15000
       };
