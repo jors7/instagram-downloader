@@ -1,0 +1,18 @@
+{
+  "name": "ig-downloader",
+  "version": "1.0.0",
+  "description": "A modern web application for downloading Instagram content including photos, videos, reels, and stories.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev:3001",
+    "start": "npm run dev",
+    "stop": "pkill -f \"node.*backend\" && pkill -f \"next dev -p 3001\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
