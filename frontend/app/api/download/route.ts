@@ -132,17 +132,26 @@ export async function POST(request: NextRequest) {
 
       const postType = getPostType(url);
 
+      // Ensure thumbnails are set for images
+      const mediaWithThumbnails = media.map(item => ({
+        ...item,
+        thumbnail: item.thumbnail || (item.type === 'image' ? item.url : undefined)
+      }));
+
+      console.log('Media with thumbnails:', mediaWithThumbnails);
+
       const result: DownloadResponse = {
         success: true,
         data: {
           type: postType,
-          media,
+          media: mediaWithThumbnails,
           username: response.data.username || response.data.author || 'instagram_user',
           caption: response.data.caption || response.data.description || '',
           timestamp: new Date().toISOString()
         }
       };
 
+      console.log('Sending result:', result);
       return NextResponse.json(result);
 
     } catch (apiError: any) {

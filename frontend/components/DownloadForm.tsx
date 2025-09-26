@@ -50,6 +50,8 @@ export default function DownloadForm({ contentType = 'all' }: DownloadFormProps)
         throw new Error(data.error || 'Failed to fetch content');
       }
 
+      console.log('API Response:', data);
+      console.log('Media data:', data.data?.media);
       setResult(data.data);
     } catch (err: any) {
       setError(err.message || 'An error occurred while fetching the content');
@@ -172,10 +174,11 @@ export default function DownloadForm({ contentType = 'all' }: DownloadFormProps)
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
-                          // Try proxy as fallback
-                          if (!img.dataset.triedProxy) {
-                            img.dataset.triedProxy = 'true';
-                            img.src = `http://localhost:5001/api/download/media?url=${encodeURIComponent(item.thumbnail)}&type=image&index=${index + 1}`;
+                          console.error('Image load error:', item.thumbnail);
+                          // If image fails to load, try using the main URL if it's an image
+                          if (!img.dataset.triedFallback && item.type === 'image') {
+                            img.dataset.triedFallback = 'true';
+                            img.src = item.url;
                           } else {
                             // If both fail, hide image
                             img.style.display = 'none';
