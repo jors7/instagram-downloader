@@ -34,7 +34,7 @@ export default function DownloadForm({ contentType = 'all' }: DownloadFormProps)
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:5001/api/download?t=${Date.now()}`, {
+      const response = await fetch(`/api/download?t=${Date.now()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
