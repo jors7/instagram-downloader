@@ -78,23 +78,27 @@ export async function POST(request: NextRequest) {
         media = response.data.media.map((item: any) => ({
           url: item.url,
           type: item.type === 'video' ? 'video' : 'image',
-          thumbnail: item.thumbnail,
+          thumbnail: item.thumbnail || (item.type === 'image' ? item.url : undefined),
           quality: item.quality || 'high'
         }));
       } else if (response.data.url) {
         media = [{
           url: response.data.url,
           type: getMediaType(response.data.url),
-          thumbnail: response.data.thumb || response.data.thumbnail,
+          thumbnail: response.data.thumb || response.data.thumbnail || (getMediaType(response.data.url) === 'image' ? response.data.url : undefined),
           quality: 'high'
         }];
       } else if (response.data.urls && Array.isArray(response.data.urls)) {
-        media = response.data.urls.map((urlItem: any) => ({
-          url: typeof urlItem === 'string' ? urlItem : urlItem.url,
-          type: getMediaType(typeof urlItem === 'string' ? urlItem : urlItem.url),
-          thumbnail: response.data.thumb,
-          quality: 'high'
-        }));
+        media = response.data.urls.map((urlItem: any) => {
+          const mediaUrl = typeof urlItem === 'string' ? urlItem : urlItem.url;
+          const mediaType = getMediaType(mediaUrl);
+          return {
+            url: mediaUrl,
+            type: mediaType,
+            thumbnail: response.data.thumb || (mediaType === 'image' ? mediaUrl : undefined),
+            quality: 'high'
+          };
+        });
       } else if (response.data.video) {
         media = [{
           url: response.data.video,
@@ -106,7 +110,7 @@ export async function POST(request: NextRequest) {
         media = [{
           url: response.data.image,
           type: 'image',
-          thumbnail: response.data.thumb || response.data.thumbnail,
+          thumbnail: response.data.thumb || response.data.thumbnail || response.data.image,
           quality: 'high'
         }];
       } else {
@@ -115,6 +119,7 @@ export async function POST(request: NextRequest) {
           media = extractedUrls.map(url => ({
             url,
             type: getMediaType(url),
+            thumbnail: getMediaType(url) === 'image' ? url : undefined,
             quality: 'high'
           }));
         }
