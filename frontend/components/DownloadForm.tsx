@@ -167,20 +167,19 @@ export default function DownloadForm({ contentType = 'all' }: DownloadFormProps)
                   {item.thumbnail ? (
                     <>
                       <img
-                        src={item.thumbnail}
+                        src={`/api/proxy?url=${encodeURIComponent(item.thumbnail)}`}
                         alt={`Media ${index + 1}`}
                         className="w-full h-full object-cover"
-                        crossOrigin="anonymous"
-                        referrerPolicy="no-referrer"
                         onError={(e) => {
                           const img = e.target as HTMLImageElement;
                           console.error('Image load error:', item.thumbnail);
-                          // If image fails to load, try using the main URL if it's an image
-                          if (!img.dataset.triedFallback && item.type === 'image') {
-                            img.dataset.triedFallback = 'true';
-                            img.src = item.url;
+                          // If proxy fails, try direct URL for fallback
+                          if (!img.dataset.triedDirect && item.type === 'image') {
+                            img.dataset.triedDirect = 'true';
+                            // Try proxying the main image URL
+                            img.src = `/api/proxy?url=${encodeURIComponent(item.url)}`;
                           } else {
-                            // If both fail, hide image
+                            // If both fail, show placeholder
                             img.style.display = 'none';
                           }
                         }}
