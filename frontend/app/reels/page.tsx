@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import NavHeader from '@/components/NavHeader';
 import DownloadForm from '@/components/DownloadForm';
-import Features from '@/components/Features';
-import HowItWorks from '@/components/HowItWorks';
+import WhySection from '@/components/WhySection';
+import HowItWorksDetailed from '@/components/HowItWorksDetailed';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
@@ -26,41 +26,11 @@ export default function ReelsPage() {
                 Download Reels Videos from Instagram
               </p>
               <DownloadForm contentType="reels" />
-
-              <div className="mt-16 prose prose-lg max-w-none">
-                <h2 className="text-2xl font-semibold mb-4">How to Download Instagram Reels</h2>
-                <ol className="list-decimal list-inside space-y-2 text-gray-700">
-                  <li>Open Instagram and find the Reel you want to download</li>
-                  <li>Copy the Reel URL from the share option</li>
-                  <li>Paste the URL in our downloader above</li>
-                  <li>Click Download and save the video</li>
-                </ol>
-
-                <h3 className="text-xl font-semibold mt-8 mb-4">Features of Our Reels Downloader</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
-                  <li>Download Reels in HD quality</li>
-                  <li>Keep original audio and video quality</li>
-                  <li>No watermarks or branding added</li>
-                  <li>Fast download speeds</li>
-                  <li>Works on all devices - mobile and desktop</li>
-                  <li>100% free with unlimited downloads</li>
-                </ul>
-
-                <h3 className="text-xl font-semibold mt-8 mb-4">Instagram Reels Download FAQ</h3>
-                <p className="text-gray-700 mb-4">
-                  <strong>Can I download private Reels?</strong><br />
-                  Our downloader only works with public Instagram Reels for privacy reasons.
-                </p>
-                <p className="text-gray-700 mb-4">
-                  <strong>Is it legal to download Instagram Reels?</strong><br />
-                  Downloading content for personal use is generally acceptable, but respect copyright and creator rights.
-                </p>
-              </div>
             </div>
           </div>
         </section>
-        <Features />
-        <HowItWorks />
+        <WhySection />
+        <HowItWorksDetailed />
       </main>
       <Footer />
     </>
